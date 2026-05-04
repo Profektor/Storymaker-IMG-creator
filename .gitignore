@@ -1,0 +1,5 @@
+*.img
+*.zip
+images/
+output/
+storymaker-work/
