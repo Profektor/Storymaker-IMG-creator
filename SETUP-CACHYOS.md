@@ -1,0 +1,1 @@
+# CachyOS setup OK
