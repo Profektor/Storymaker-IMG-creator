@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 set -e
 
@@ -7,7 +8,9 @@ WORKDIR="$HOME/storymaker-work"
 BASE_IMG="$WORKDIR/base.img"
 OUTPUT_IMG="$WORKDIR/storymaker-v0.1.img"
 
-# Detectar SDM (ruta absoluta para sudo)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Detectar SDM
 if command -v sdm &>/dev/null; then
   SDM="$(command -v sdm)"
 elif [ -f "$HOME/sdm/sdm" ]; then
@@ -28,7 +31,8 @@ cp "$BASE_IMG" "$OUTPUT_IMG"
 echo "→ Personalizando imagen con SDM..."
 sudo "$SDM" --customize "$OUTPUT_IMG" \
   --batch \
-  --cscript "$(realpath "$PWD/setup.sh")" \
+  --cscript "$SCRIPT_DIR/setup.sh" \
   --regen-ssh-host-keys
 
 echo "✅ Imagen generada en: $OUTPUT_IMG"
+
